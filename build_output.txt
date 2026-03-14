@@ -1,0 +1,28 @@
+Node.js version v25.0.0 detected.
+Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
+[33mÔØ»[39m Building...
+[32mÔ£ö[39m Building...
+Application bundle generation failed. [1.416 seconds] - 2026-03-14T17:43:39.964Z
+
+Ôû▓ [WARNING] NG8113: All imports are unused [plugin angular-compiler]
+
+    src/app/app.ts:6:2:
+      6 Ôöé   imports: [RouterOutlet],
+        ÔòÁ   ~~~~~~~
+
+
+X [ERROR] NG8001: 'app-header' is not a known element:
+1. If 'app-header' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'app-header' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message. [plugin angular-compiler]
+
+    src/app/app.html:0:0:
+      0 Ôöé 
+        ÔòÁ ^
+
+  Error occurs in the template of component App.
+
+    src/app/app.ts:7:15:
+      7 Ôöé   templateUrl: './app.html',
+        ÔòÁ                ~~~~~~~~~~~~
+
+

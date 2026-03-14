@@ -1,0 +1,66 @@
+@layer header-base, header-layout, header-components;
+
+:host {
+  display: block;
+
+  /* Level 5: Container Query Root */
+  container-type: inline-size;
+  container-name: header-container;
+}
+
+@layer header-base {
+  .header-container {
+    background-color: var(--header-bg);
+    color: var(--text-white);
+    /* Logical properties */
+    padding-inline: 2rem;
+    font-family: var(--font-family);
+    border-block-end: 2px solid var(--header-border);
+  }
+
+  a {
+    color: var(--text-white);
+    text-decoration: none;
+    transition: all var(--transition);
+  }
+}
+
+@layer header-layout {
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1400px;
+  }
+}
+
+@layer header-components {
+  /* Microcomponents manage their own styles now */
+}
+
+/* Level 5: Container Queries for highly modular responsiveness */
+@container header-container (max-width: 1400px) {
+  .top-bar {
+    padding-inline: 40px;
+  }
+}
+
+@container header-container (max-width: 1200px) {
+  .top-bar {
+    flex-direction: column;
+    padding-block: 1.5rem;
+  }
+}
+
+@container header-container (max-width: 768px) {
+  .header-container {
+    padding-inline: 1rem;
+  }
+  .top-bar {
+    padding-inline: 1rem;
+  }
+}

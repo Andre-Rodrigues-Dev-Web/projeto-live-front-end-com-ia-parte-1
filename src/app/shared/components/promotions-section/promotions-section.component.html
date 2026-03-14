@@ -1,0 +1,21 @@
+<section class="promotions-wrapper">
+  
+  <div class="promotions-grid">
+    <!-- Promotional Banner on the Left -->
+    <app-promo-banner 
+      tagline="Semana<br>do Consumidor"
+      discountBadge="50<small>%</small>"
+      description="Na compra<br>de sua viagem">
+    </app-promo-banner>
+
+    <!-- Destination Cards on the Right -->
+    @for (destination of destinations; track destination.title) {
+      <app-destination-card 
+        [imageSrc]="destination.imageSrc"
+        [title]="destination.title"
+        [price]="destination.price">
+      </app-destination-card>
+    }
+  </div>
+
+</section>

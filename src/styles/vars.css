@@ -1,0 +1,56 @@
+:root {
+  /* =========================================
+     Global Palette Premium
+     ========================================= */
+  --color-bg-dark: #0f172a;
+  --color-bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-secondary: #8b5cf6;
+  --color-text-main: #f8fafc;
+  --color-text-muted: #94a3b8;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(16px);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+  /* Buttons */
+  --btn-orange: #f59e0b;
+  --btn-orange-hover: color-mix(in srgb, #f59e0b 85%, black);
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Additional global transition definition */
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Typography */
+  --font-family: 'Montserrat', system-ui, sans-serif;
+
+  /* =========================================
+     Header Component Variables
+     ========================================= */
+  --header-bg: #4f2294; /* Dark Purple */
+  --btn-green: #10b981; /* Default User Button Green */
+  --text-white: #ffffff;
+  
+  /* Level 5: color-mix variations */
+  --header-border: color-mix(in srgb, var(--text-white) 10%, transparent);
+  --btn-green-hover: color-mix(in srgb, var(--btn-green) 85%, black);
+
+  /* =========================================
+     Ticket Search Component Variables
+     ========================================= */
+  --ts-bg: #ffffff;
+  --ts-input-bg: #f4f5f7;
+  --ts-text-main: #1a202c;
+  --ts-text-muted: #718096;
+  --ts-accent: #5111ba; /* Deep purple */
+  --ts-accent-hover: #3d0c8c;
+  --ts-toggle-track: #f4f5f7;
+  --ts-brand-font: 'Montserrat', system-ui, sans-serif;
+}

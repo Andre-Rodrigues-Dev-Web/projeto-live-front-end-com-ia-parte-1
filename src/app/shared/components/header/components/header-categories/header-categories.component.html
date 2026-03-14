@@ -1,0 +1,10 @@
+<nav class="categories-nav">
+  <div class="categories-container">
+    @for (category of categories; track category.name) {
+      <a href="#" class="category-item">
+        <i [class]="category.icon + ' category-icon'"></i>
+        <span class="category-name">{{ category.name }}</span>
+      </a>
+    }
+  </div>
+</nav>
