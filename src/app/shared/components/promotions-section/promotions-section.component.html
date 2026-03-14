@@ -9,7 +9,7 @@
     </app-promo-banner>
 
     <!-- Destination Cards on the Right -->
-    @for (destination of destinations; track destination.title) {
+    @for (destination of destinations(); track destination.title) {
       <app-destination-card 
         [imageSrc]="destination.imageSrc"
         [title]="destination.title"

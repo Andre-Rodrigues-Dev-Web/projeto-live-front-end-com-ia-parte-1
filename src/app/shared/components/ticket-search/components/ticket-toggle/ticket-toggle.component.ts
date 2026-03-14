@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-ticket-toggle',
-  standalone: true,
   templateUrl: './ticket-toggle.component.html',
-  styleUrls: ['./ticket-toggle.component.css']
+  styleUrl: './ticket-toggle.component.css'
 })
 export class TicketToggleComponent {
-  @Input({ required: true }) label!: string;
+  label = input.required<string>();
 }

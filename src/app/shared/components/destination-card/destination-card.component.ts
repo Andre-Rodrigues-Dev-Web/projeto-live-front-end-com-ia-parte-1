@@ -1,15 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, input } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-destination-card',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [CurrencyPipe],
   templateUrl: './destination-card.component.html',
-  styleUrls: ['./destination-card.component.css']
+  styleUrl: './destination-card.component.css'
 })
 export class DestinationCardComponent {
-  @Input({ required: true }) imageSrc!: string;
-  @Input({ required: true }) title!: string;
-  @Input({ required: true }) price!: number;
+  imageSrc = input.required<string>();
+  title = input.required<string>();
+  price = input.required<number>();
 }

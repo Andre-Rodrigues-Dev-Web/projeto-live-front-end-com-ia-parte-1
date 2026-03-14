@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { DestinationCardComponent } from '../destination-card/destination-card.component';
 import { PromoBannerComponent } from '../promo-banner/promo-banner.component';
 
 @Component({
   selector: 'app-promotions-section',
-  standalone: true,
-  imports: [CommonModule, DestinationCardComponent, PromoBannerComponent],
+  imports: [DestinationCardComponent, PromoBannerComponent],
   templateUrl: './promotions-section.component.html',
-  styleUrls: ['./promotions-section.component.css']
+  styleUrl: './promotions-section.component.css'
 })
 export class PromotionsSectionComponent {
-  destinations = [
+  destinations = signal([
     {
       title: 'Conheça o Rio de Janeiro!',
       imageSrc: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=600&auto=format&fit=crop',
@@ -22,5 +20,5 @@ export class PromotionsSectionComponent {
       imageSrc: 'https://images.unsplash.com/photo-1549419149-1db7d6dbfc33?q=80&w=600&auto=format&fit=crop',
       price: 1900.00
     }
-  ];
+  ]);
 }
