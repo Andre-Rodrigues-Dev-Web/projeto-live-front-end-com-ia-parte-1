@@ -53,10 +53,10 @@
   font-size: 2.5rem;
   font-weight: 800;
   line-height: 1;
+}
 
-  ::ng-deep small {
-    font-size: 1.5rem;
-  }
+.discount-value small {
+  font-size: 1.5rem;
 }
 
 .banner-desc {
@@ -85,6 +85,6 @@
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(0px);
   }
 }

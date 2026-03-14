@@ -1,7 +1,7 @@
 <article class="destination-card">
   <div class="image-wrapper">
     <!-- Usando cor de fallback temporária até que a imagem seja fornecida no projeto -->
-    <img [src]="imageSrc" [alt]="title" loading="lazy" decoding="async" onerror="this.style.display='none'" />
+    <img [src]="imageSrc" [alt]="title" loading="eager" decoding="async" onerror="this.style.display='none'" />
     <div class="fallback-img" aria-hidden="true"></div>
   </div>
   <div class="card-content">

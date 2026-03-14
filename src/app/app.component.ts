@@ -1,13 +1,10 @@
 import { Component, computed, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { TicketSearchComponent } from './shared/components/ticket-search/ticket-search.component';
-import { PromotionsSectionComponent } from './shared/components/promotions-section/promotions-section.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, TicketSearchComponent, PromotionsSectionComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

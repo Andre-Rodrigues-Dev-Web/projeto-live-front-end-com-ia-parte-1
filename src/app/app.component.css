@@ -162,7 +162,7 @@
 }
 
 .primary-btn:active {
-  transform: translateY(0);
+  transform: translateY(0px);
 }
 
 .celebration-msg {
@@ -185,7 +185,7 @@
 @keyframes slideUp {
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0px);
   }
 }
 
