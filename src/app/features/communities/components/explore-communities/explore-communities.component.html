@@ -1,0 +1,165 @@
+<div class="explore-container">
+  <!-- Header -->
+  <div class="explore-header">
+    <div class="header-left">
+      <h2><i class="fas fa-compass"></i> Comunidades & Páginas</h2>
+      <p>Descubra novos grupos de interesse e acompanhe marcas ou criadores.</p>
+    </div>
+    <button mat-raised-button color="primary" class="create-btn" (click)="openCreateModal()">
+      <i class="fas fa-plus"></i> Criar Novo
+    </button>
+  </div>
+
+  <!-- Tabs Navigation (Separated Phase 2) -->
+  <div class="explore-tabs">
+    <button mat-button [class.active]="currentTab() === 'groups'" (click)="setTab('groups')">
+      <i class="fas fa-users"></i> Explorar Grupos
+    </button>
+    <button mat-button [class.active]="currentTab() === 'pages'" (click)="setTab('pages')">
+      <i class="fas fa-flag"></i> Explorar Páginas
+    </button>
+    <button mat-button [class.active]="currentTab() === 'my-groups'" (click)="setTab('my-groups')">
+      <i class="fas fa-user-friends"></i> Meus Grupos
+    </button>
+    <button mat-button [class.active]="currentTab() === 'my-pages'" (click)="setTab('my-pages')">
+      <i class="fas fa-bookmark"></i> Páginas Seguidas
+    </button>
+  </div>
+
+  <!-- Content Grid -->
+  <div class="grid-content">
+
+    <!-- 1. EXPLORE GROUPS -->
+    <div class="cards-grid" *ngIf="currentTab() === 'groups'">
+      <div class="no-items" *ngIf="groups().length === 0">Nenhum grupo encontrado.</div>
+      <mat-card *ngFor="let item of groups()" class="item-card mat-elevation-z2">
+        <div class="cover" [style.background]="item.coverBg"></div>
+        <mat-card-content class="card-body">
+          <img [src]="item.avatar" [alt]="item.name" class="avatar-sm">
+          <div class="content-text">
+            <h4>{{ item.name }}</h4>
+            <span class="category-badge">{{ item.category }}</span>
+            <p class="description">{{ item.description }}</p>
+            <div class="stats"><i class="fas fa-users"></i> {{ item.memberCount }} membros</div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+          <button mat-raised-button color="primary" *ngIf="!item.isJoined" (click)="joinGroup(item.id)">Participar</button>
+          <button mat-button color="warn" *ngIf="item.isJoined" (click)="leaveGroup(item.id)">Sair</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <!-- 2. EXPLORE PAGES -->
+    <div class="cards-grid" *ngIf="currentTab() === 'pages'">
+      <div class="no-items" *ngIf="pages().length === 0">Nenhuma página encontrada.</div>
+      <mat-card *ngFor="let item of pages()" class="item-card mat-elevation-z2">
+        <div class="cover" [style.background]="item.coverBg"></div>
+        <mat-card-content class="card-body">
+          <img [src]="item.avatar" [alt]="item.name" class="avatar-sm">
+          <div class="content-text">
+            <h4>{{ item.name }}</h4>
+            <span class="category-badge">{{ item.category }}</span>
+            <p class="description">{{ item.description }}</p>
+            <div class="stats"><i class="fas fa-rss"></i> {{ item.memberCount }} seguidores</div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+          <button mat-raised-button color="accent" *ngIf="!item.isFollowing" (click)="followPage(item.id)">Seguir</button>
+          <button mat-button color="warn" *ngIf="item.isFollowing" (click)="unfollowPage(item.id)">Deixar de Seguir</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <!-- 3. MY GROUPS -->
+    <div class="cards-grid" *ngIf="currentTab() === 'my-groups'">
+      <div class="no-items" *ngIf="myGroups().length === 0">
+        <i class="fas fa-folder-open"></i><p>Você não participa de nenhum grupo.</p>
+      </div>
+      <mat-card *ngFor="let item of myGroups()" class="item-card mat-elevation-z2">
+        <div class="cover" [style.background]="item.coverBg"></div>
+        <mat-card-content class="card-body">
+          <img [src]="item.avatar" [alt]="item.name" class="avatar-sm">
+          <div class="content-text">
+            <h4>{{ item.name }}</h4>
+            <span class="category-badge">{{ item.category }}</span>
+            <p class="description">{{ item.description }}</p>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+          <button mat-button color="warn" (click)="leaveGroup(item.id)">Sair</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <!-- 4. MY PAGES -->
+    <div class="cards-grid" *ngIf="currentTab() === 'my-pages'">
+      <div class="no-items" *ngIf="myPages().length === 0">
+        <i class="fas fa-folder-open"></i><p>Você não segue nenhuma página.</p>
+      </div>
+      <mat-card *ngFor="let item of myPages()" class="item-card mat-elevation-z2">
+        <div class="cover" [style.background]="item.coverBg"></div>
+        <mat-card-content class="card-body">
+          <img [src]="item.avatar" [alt]="item.name" class="avatar-sm">
+          <div class="content-text">
+            <h4>{{ item.name }}</h4>
+            <span class="category-badge">{{ item.category }}</span>
+            <p class="description">{{ item.description }}</p>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+          <button mat-button color="warn" (click)="unfollowPage(item.id)">Deixar de Seguir</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+  </div>
+
+  <!-- Create Modal (Overlay) -->
+  <div class="modal-overlay" *ngIf="isCreateModalOpen()" (click)="closeCreateModal()">
+    <div class="create-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3><i class="fas fa-plus-circle"></i> Criar Espaço</h3>
+        <button mat-icon-button (click)="closeCreateModal()" class="close-btn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <form [formGroup]="createForm" (ngSubmit)="submitCreate()" class="modal-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" placeholder="Ex: Angular Experts">
+          <mat-error *ngIf="nameCtrl.hasError('required')">Nome é obrigatório.</mat-error>
+          <mat-error *ngIf="nameCtrl.hasError('minlength')">Mínimo 3 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Descrição</mat-label>
+          <textarea matInput formControlName="description" rows="3" placeholder="Do que se trata esse espaço?"></textarea>
+          <mat-error *ngIf="descCtrl.hasError('required')">Descrição é obrigatória.</mat-error>
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half">
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="type">
+              <mat-option value="group">Comunidade/Grupo</mat-option>
+              <mat-option value="page">Página/Marca</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="category">
+              <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="createForm.invalid" class="submit-btn">
+          ✨ Criar Agora
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

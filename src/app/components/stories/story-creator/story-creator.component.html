@@ -1,0 +1,98 @@
+<div class="modal-overlay" (click)="closeAddModal()">
+  <div class="add-story-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Criar Story ✨</h3>
+      <button class="close-modal" (click)="closeAddModal()">✕</button>
+    </div>
+
+    <!-- Preview -->
+    <div class="story-preview-large" [style.background]="selectedBg" #previewBox 
+         (mousemove)="onDragMove($event, previewBox)" (mouseup)="onDragEnd()" 
+         (mouseleave)="onDragEnd()" (touchmove)="onDragMove($event, previewBox)" 
+         (touchend)="onDragEnd()">
+      
+      <!-- Media Content -->
+      <img [src]="attachedMedia()" *ngIf="attachedMedia() && mediaType() === 'image'" class="preview-media" [style.filter]="selectedFilter()">
+      <video [src]="attachedMedia()" *ngIf="attachedMedia() && mediaType() === 'video'" controls class="preview-media" [style.filter]="selectedFilter()"></video>
+      
+      <!-- Text/Default Layout -->
+      <p class="preview-text" *ngIf="previewText && mediaType() === 'text'">{{ previewText }}</p>
+      <p class="preview-placeholder" *ngIf="!previewText && !attachedMedia()">Prévia do seu story...</p>
+
+      <!-- Floating Text Overlay (If Media) -->
+      <p class="preview-overlay-text" *ngIf="previewText && mediaType() !== 'text'" 
+         [style.left.%]="overlayX()" [style.top.%]="overlayY()" 
+         (mousedown)="onDragStart($event)" (touchstart)="onDragStart($event)" 
+         style="position: absolute; cursor: move; transform: translate(-50%, -50%);">
+        {{ previewText }}
+      </p>
+
+      <!-- Remove Media Btn -->
+      <button type="button" class="remove-media-btn" *ngIf="attachedMedia()" (click)="removeMedia()">✕</button>
+    </div>
+
+    <!-- Creator Actions (Media Upload) -->
+    <div class="creator-media-actions">
+      <input type="file" #storyFileInput (change)="onFileSelected($event)" accept="image/*,video/*" style="display: none">
+      <button type="button" mat-stroked-button (click)="storyFileInput.click()">
+        <i class="fas fa-camera"></i> Adicionar Foto/Vídeo
+      </button>
+    </div>
+
+    <!-- Filters Picker -->
+    <div class="filter-picker" *ngIf="attachedMedia()">
+      <span class="picker-label"><i class="fas fa-filter"></i> Filtros:</span>
+      <div class="filter-options">
+        <button
+          type="button"
+          *ngFor="let filter of filters"
+          class="filter-swatch"
+          [class.selected]="selectedFilter() === filter.value"
+          (click)="selectFilter(filter.value)"
+        >{{ filter.name }}</button>
+      </div>
+    </div>
+
+    <!-- Reactive Form -->
+    <form [formGroup]="storyForm" (ngSubmit)="publishStory()">
+      <mat-form-field appearance="outline" class="story-input-field">
+        <mat-label>{{ mediaType() === 'text' ? 'Texto do Story' : 'Legenda / Texto Sobreposto' }}</mat-label>
+        <textarea
+          matInput
+          formControlName="content"
+          rows="2"
+          maxlength="120"
+        ></textarea>
+        <mat-hint align="end">{{ charCount }}/120</mat-hint>
+
+        <mat-error *ngIf="contentCtrl.hasError('profanity')">
+          <i class="fas fa-exclamation-circle"></i> {{ contentCtrl.getError('profanity').message }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Background Picker (Only if text-only) -->
+      <div class="bg-picker" *ngIf="mediaType() === 'text'">
+        <span class="bg-label"><i class="fas fa-palette"></i> Cor de fundo:</span>
+        <div class="bg-options">
+          <button
+            type="button"
+            *ngFor="let bg of gradients"
+            class="bg-swatch"
+            [class.selected]="selectedBg === bg"
+            [style.background]="bg"
+            (click)="selectBg(bg)"
+          ></button>
+        </div>
+      </div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="publish-story-btn"
+      >
+        <i class="fas fa-paper-plane"></i> Publicar Story
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <!-- Cover Image -->
+    <div class="cover-image">
+      <img [src]="user().coverImage" [alt]="user().name">
+    </div>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="profile-info">
+        <img [src]="user().avatar" [alt]="user().name" class="profile-avatar">
+        <div class="user-info">
+          <h1 class="user-name">{{ user().name }}</h1>
+          <p class="username">{{ user().username }}</p>
+          <p class="bio">{{ user().bio }}</p>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <!-- Privacy Toggle (2025) -->
+        <label class="privacy-toggle">
+          <input type="checkbox" [checked]="user().isPrivate" (change)="togglePrivacy()">
+          <span class="toggle-slider"></span>
+          <span class="toggle-label">🔒 Perfil Particular</span>
+        </label>
+
+        <button class="action-btn primary" (click)="editProfile()">
+          ✏️ Editar Perfil
+        </button>
+        <button class="action-btn" (click)="shareProfile()">
+          ↗️ Compartilhar
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-section">
+      <div class="stat">
+        <span class="stat-value">{{ stats().posts }}</span>
+        <span class="stat-label">Posts</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">{{ stats().followers | number }}</span>
+        <span class="stat-label">Seguidores</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">{{ stats().following }}</span>
+        <span class="stat-label">Seguindo</span>
+      </div>
+      <div class="stat revenue">
+        <span class="stat-value">R$ {{ stats().revenue | number: '1.2-2' }}</span>
+        <span class="stat-label">Receita</span>
+      </div>
+    </div>
+
+    <!-- Monetization Info -->
+    <div class="monetization-section">
+      <h3 class="section-title">💰 Monetização</h3>
+      <div class="monetization-info">
+        <p>Você está gerando receita através de anúncios patrocinados em seu perfil.</p>
+        <div class="revenue-breakdown">
+          <div class="revenue-item">
+            <span class="label">Anúncios Exibidos</span>
+            <span class="value">1,245</span>
+          </div>
+          <div class="revenue-item">
+            <span class="label">Cliques em Anúncios</span>
+            <span class="value">89</span>
+          </div>
+          <div class="revenue-item">
+            <span class="label">Taxa de Cliques (CTR)</span>
+            <span class="value">7.14%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievements -->
+    <div class="achievements-section">
+      <h3 class="section-title">🏆 Conquistas</h3>
+      <div class="achievements">
+        <div class="achievement" title="Criador de Conteúdo">
+          <span class="achievement-icon">⭐</span>
+          <span class="achievement-name">Criador</span>
+        </div>
+        <div class="achievement" title="Influenciador">
+          <span class="achievement-icon">👑</span>
+          <span class="achievement-name">Influenciador</span>
+        </div>
+        <div class="achievement" title="Engajamento Alto">
+          <span class="achievement-icon">🔥</span>
+          <span class="achievement-name">Engajado</span>
+        </div>
+        <div class="achievement" title="Monetização Ativa">
+          <span class="achievement-icon">💎</span>
+          <span class="achievement-name">Premium</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

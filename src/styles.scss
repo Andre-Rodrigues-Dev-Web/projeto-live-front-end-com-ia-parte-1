@@ -1,0 +1,65 @@
+@use './app/vars';
+
+/* Reset SCSS 2025 */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Angular Material overrides — force Montserrat on all material elements */
+.mat-typography,
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-icon-button,
+.mat-mdc-form-field,
+.mat-mdc-input-element,
+.mat-mdc-select,
+.mdc-text-field,
+.mdc-text-field__input {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: #c0c0c0; border-radius: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* Angular Material color overrides for primary brand (#0a66c2) */
+:root {
+  --mat-sys-primary: #0a66c2;
+  --brand-blue: #0a66c2;
+  --brand-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Font Awesome utility */
+.fa-icon-spin { animation: fa-spin 1s linear infinite; }

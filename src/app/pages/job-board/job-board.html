@@ -1,0 +1,68 @@
+<div class="jobs-container">
+  <div class="header-banner">
+    <div class="banner-content">
+      <h1>👔 Classificados de Emprego <span class="badge">Bambuí</span></h1>
+      <p>Encontre sua próxima oportunidade de trabalho ou estágio na região. Conectando talentos e empresas!</p>
+    </div>
+  </div>
+
+  <div class="directory-content">
+    <!-- Filters & Search -->
+    <div class="filter-section">
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Buscar cargo, empresa ou requisito..." [value]="searchQuery()" (input)="updateSearch($event)">
+      </div>
+
+      <div class="categories-list">
+        <button 
+          *ngFor="let type of jobTypes" 
+          [class.active]="selectedType() === type"
+          (click)="setType(type)"
+          class="cat-btn"
+        >
+          {{ type }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Listings List -->
+    <div class="job-list">
+      <div class="empty-state" *ngIf="filteredJobs().length === 0">
+        <div class="empty-icon">📂</div>
+        <h3>Nenhuma vaga encontrada</h3>
+        <p>Tente buscar por outro termo ou tipo de contrato.</p>
+      </div>
+
+      <div class="job-card" *ngFor="let job of filteredJobs()">
+        <div class="job-header">
+          <div class="title-area">
+            <h3 class="job-title">{{ job.title }}</h3>
+            <p class="company-name"><i class="fas fa-building"></i> {{ job.company }}</p>
+          </div>
+          <span class="type-badge" [ngClass]="['type-' + job.type.toLowerCase().replace(' ', '-')]">{{ job.type }}</span>
+        </div>
+
+        <div class="job-meta">
+          <span><i class="fas fa-map-marker-alt"></i> {{ job.location }}</span>
+          <span><i class="fas fa-money-bill-wave"></i> {{ job.salary }}</span>
+          <span><i class="fas fa-clock"></i> {{ calculateDaysAgo(job.postedAt) }}</span>
+        </div>
+
+        <p class="job-description">{{ job.description }}</p>
+
+        <div class="job-requirements">
+          <h4>Requisitos:</h4>
+          <ul>
+            <li *ngFor="let req of job.requirements">{{ req }}</li>
+          </ul>
+        </div>
+
+        <div class="card-actions">
+          <button class="action-btn apply"><i class="fas fa-paper-plane"></i> Enviar Currículo</button>
+          <button class="action-btn share"><i class="fas fa-share-alt"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

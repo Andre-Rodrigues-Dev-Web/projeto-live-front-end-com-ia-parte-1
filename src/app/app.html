@@ -1,1 +1,63 @@
-<router-outlet></router-outlet>
+<div class="app-container">
+  <!-- Navigation Header -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="layout-grid">
+      <!-- Left Column (Desktop) -->
+      <div class="sidebar-column left desktop-only">
+        <app-left-sidebar></app-left-sidebar>
+      </div>
+
+      <!-- Central Column -->
+      <div class="content-column">
+        <!-- Dinamic Views (Router) -->
+        <div class="view-container">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+      <!-- Right Column (Sidebar on desktop) -->
+      <div class="sidebar-column desktop-only">
+        <app-sidebar></app-sidebar>
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Sidebar Drawer -->
+  <div class="sidebar-overlay" *ngIf="isSidebarOpen()" (click)="closeSidebar()"></div>
+  <div class="sidebar-drawer" [class.open]="isSidebarOpen()">
+    <div class="drawer-header">
+      <span>Pessoas Online</span>
+      <button class="drawer-close" (click)="closeSidebar()">✕</button>
+    </div>
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <!-- Overlay Features -->
+  <app-chat-window></app-chat-window>
+  <app-story-viewer></app-story-viewer>
+
+  <!-- Floating Cookie Consent (LGPD / GDPR) -->
+  <div class="cookie-banner" *ngIf="showCookieBanner()">
+    <div class="cookie-content">
+      <div class="cookie-header">
+        <i class="fas fa-shield-halved cookie-icon"></i>
+        <h4>Sua Privacidade é Importante 🔐</h4>
+      </div>
+      <p class="cookie-text">
+        Utilizamos cookies para personalizar sua experiência e anúncios, em conformidade com a <strong>LGPD</strong> e
+        <strong>GDPR</strong>.
+        Você aceita os nossos termos?
+      </p>
+      <div class="cookie-actions">
+        <button class="cookie-btn btn-sec" (click)="acceptCookies(false)">Recusar</button>
+        <button class="cookie-btn btn-pri" (click)="acceptCookies(true)">Aceitar Todos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Upgrade (2025) -->
+  <app-footer></app-footer>
+</div>

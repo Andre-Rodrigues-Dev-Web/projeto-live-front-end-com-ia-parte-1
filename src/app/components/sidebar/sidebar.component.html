@@ -1,0 +1,22 @@
+<aside class="sidebar-container">
+  <div class="sidebar-header">
+    <h3><i class="fas fa-users"></i> Pessoas Online</h3>
+    <span class="online-count" [matBadge]="onlineUsers().length" matBadgeColor="accent" matBadgeSize="small">
+    </span>
+  </div>
+
+  <mat-list class="users-list">
+    <mat-list-item
+      *ngFor="let user of onlineUsers()"
+      class="user-item"
+      (click)="openChat(user.id)"
+    >
+      <div class="user-avatar" matListItemAvatar>
+        <img [src]="user.avatar" [alt]="user.name" class="user-avatar-img">
+        <i class="fas fa-circle status-dot"></i>
+      </div>
+      <span matListItemTitle class="user-name">{{ user.name }}</span>
+      <span matListItemLine class="user-status">Online agora</span>
+    </mat-list-item>
+  </mat-list>
+</aside>

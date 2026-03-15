@@ -1,0 +1,30 @@
+<div class="stories-wrapper">
+  <!-- Stories Strip -->
+  <div class="stories-strip">
+    <!-- Add Story Card -->
+    <div class="story-card add-story" (click)="openAddModal()">
+      <div class="story-preview add-preview">
+        <span class="add-plus"><i class="fas fa-plus"></i></span>
+        <div class="story-avatar">🧑</div>
+      </div>
+      <span class="story-name">Seu Story</span>
+    </div>
+
+    <!-- Friends Stories -->
+    <div
+      *ngFor="let story of stories()"
+      class="story-card"
+      [class.seen]="story.seen"
+      (click)="openStory(story.id)"
+    >
+      <div class="story-preview" [style.background]="story.previewBg">
+        <span class="story-preview-emoji">{{ story.previewEmoji }}</span>
+        <div class="story-avatar">{{ story.avatar }}</div>
+      </div>
+      <span class="story-name">{{ story.user }}</span>
+    </div>
+  </div>
+
+  <!-- Add Story Modal -->
+  <app-story-creator *ngIf="isAddModalOpen()"></app-story-creator>
+</div>

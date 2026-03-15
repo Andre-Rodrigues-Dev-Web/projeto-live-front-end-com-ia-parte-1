@@ -1,0 +1,57 @@
+<div class="viewer-overlay" *ngIf="activeStory() as story" (click)="close()">
+  <div class="viewer-card" (click)="$event.stopPropagation()">
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-wrapper">
+      <div class="progress-bar" [style.width.%]="progress()"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="viewer-header">
+      <div class="viewer-user-info">
+        <div class="viewer-avatar">{{ story.avatar }}</div>
+        <div>
+          <span class="viewer-name">{{ story.user }}</span>
+          <span class="viewer-time">Agora</span>
+        </div>
+      </div>
+      <div class="viewer-actions">
+        <button class="edit-btn" *ngIf="story.user === 'Você'" (click)="enableEdit()">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="close-btn" (click)="close()">✕</button>
+      </div>
+    </div>
+
+    <!-- Story Content (first slide only) -->
+    <div class="story-content" [style.background]="story.slides[0].type === 'text' ? story.slides[0].bg : '#000'">
+      
+      <!-- Image Slide -->
+      <img [src]="story.slides[0].content" *ngIf="story.slides[0].type === 'image'" class="story-media" [style.filter]="story.slides[0].filter">
+      
+      <!-- Video Slide -->
+      <video [src]="story.slides[0].content" *ngIf="story.slides[0].type === 'video'" class="story-media" [style.filter]="story.slides[0].filter" autoplay playsinline muted></video>
+
+      <!-- Text Content (Only if text) -->
+      <p class="story-text" *ngIf="story.slides[0].type === 'text'">{{ story.slides[0].content }}</p>
+
+      <!-- Text Overlay (If media) -->
+      <p class="story-overlay-text" *ngIf="story.slides[0].type !== 'text' && story.slides[0].overlays?.length" [style.left.%]="story.slides[0].overlays?.[0]?.x || 50" [style.top.%]="story.slides[0].overlays?.[0]?.y || 50" style="transform: translate(-50%, -50%);">
+        {{ story.slides[0].overlays?.[0]?.content }}
+      </p>
+
+      <!-- Edit Mode Overlay -->
+      <div class="edit-story-overlay" *ngIf="isEditing()">
+        <textarea [(ngModel)]="editContent" class="edit-story-textarea"></textarea>
+        <div class="edit-story-actions">
+          <button class="edit-action-btn save" (click)="saveEdit()">Salvar</button>
+          <button class="edit-action-btn cancel" (click)="cancelEdit()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Areas -->
+    <div class="nav-prev" (click)="prev()"></div>
+    <div class="nav-next" (click)="next()"></div>
+  </div>
+</div>

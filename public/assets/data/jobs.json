@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Vendedor(a) de Loja",
+    "company": "Loja Multi Preços",
+    "location": "Centro, Bambuí",
+    "salary": "R$ 1.650,00 + Comissão",
+    "type": "Tempo Integral",
+    "description": "Responsável pelo atendimento ao cliente, organização de prateleiras e auxílio no fechamento de caixa. Experiência em vendas é um diferencial.",
+    "requirements": [
+      "Ensino Médio completo",
+      "Boa comunicação",
+      "Disponibilidade para trabalhar aos sábados"
+    ],
+    "postedAt": "2026-03-14"
+  },
+  {
+    "id": 2,
+    "title": "Estagiário de Administração",
+    "company": "ACIB (Associação Comercial)",
+    "location": "Praça Omar Chaves, Bambuí",
+    "salary": "R$ 900,00 (Bolsa Auxílio)",
+    "type": "Estágio",
+    "description": "Auxiliar na rotina administrativa, atendimento a associados, emissão de boletos e organização de eventos da associação.",
+    "requirements": [
+      "Cursando Superior ou Técnico em Administração",
+      "Conhecimento em Pacote Office",
+      "Proatividade"
+    ],
+    "postedAt": "2026-03-13"
+  },
+  {
+    "id": 3,
+    "title": "Atendente de Lanchonete",
+    "company": "Smart Pag Pouco (Cafeteria)",
+    "location": "Av. Armando Franco, Bambuí",
+    "salary": "R$ 1.512,00",
+    "type": "Tempo Integral",
+    "description": "Preparação de cafés, lanches rápidos, atendimento no balcão e limpeza do local de trabalho.",
+    "requirements": [
+      "Simpatia e agilidade",
+      "Higiene e organização",
+      "Não exige experiência"
+    ],
+    "postedAt": "2026-03-15"
+  },
+  {
+    "id": 4,
+    "title": "Auxiliar de Almoxarifado",
+    "company": "Parafusos e Cia",
+    "location": "Rui Barbosa, Bambuí",
+    "salary": "Salário a combinar",
+    "type": "Tempo Integral",
+    "description": "Controle de estoque, recebimento de mercadorias, expedição e contagem de peças (parafusos, ferramentas).",
+    "requirements": [
+      "Ensino Fundamental / Médio",
+      "Noções mínimas de informática",
+      "Disposição física para carga/descarga"
+    ],
+    "postedAt": "2026-03-11"
+  }
+]

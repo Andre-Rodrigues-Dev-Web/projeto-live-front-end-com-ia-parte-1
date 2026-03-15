@@ -1,0 +1,57 @@
+/* SCSS Variables */
+$glass-bg: rgba(255, 255, 255, 0.7);
+$glass-border: rgba(255, 255, 255, 0.25);
+$glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+$ambient-blur: blur(12px) saturate(160%);
+$neon-accent: linear-gradient(135deg, #0a66c2 0%, #00c9ff 50%, #92fe9d 100%);
+$bg-color: #f3f5f9;
+
+/* Custom Palette 2025 */
+$color-parsley: #1e5d1a;
+$color-hampton: #e1e3a9;
+$color-de-york: #6fbf84;
+$color-deep-cerulean: #0675aa;
+
+:root {
+  --glass-bg: #{$glass-bg};
+  --glass-border: #{$glass-border};
+  --glass-shadow: #{$glass-shadow};
+  --ambient-blur: #{$ambient-blur};
+  --neon-accent: #{$neon-accent};
+  --bg-color: #{$bg-color};
+  
+  /* Custom Palette Variables */
+  --color-parsley: #{$color-parsley};
+  --color-hampton: #{$color-hampton};
+  --color-de-york: #{$color-de-york};
+  --color-deep-cerulean: #{$color-deep-cerulean};
+  
+  /* Fonts */
+  --font-family: 'Montserrat', sans-serif;
+}
+
+/* Dark Mode Overrides */
+body.dark-mode {
+  --bg-color: #121212;
+  --glass-bg: rgba(30, 30, 30, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  color: #f1f3f5;
+
+  .navbar { background: rgba(25, 25, 25, 0.9); }
+  .match-card, .menu-link, .post-card, .view-container { 
+    background: #1e1e1e !important; 
+    color: #e2e8f0 !important; 
+    border-color: #2d3748 !important;
+  }
+}
+
+/* Font Size Scales */
+body.font-small { font-size: 14px !important; }
+body.font-medium { font-size: 16px !important; }
+body.font-large { 
+  font-size: 20px !important; 
+  h1 { font-size: 2.5rem !important; }
+  p { font-size: 1.2rem !important; }
+  .nav-btn { font-size: 16px !important; }
+}

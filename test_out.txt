@@ -1,0 +1,76 @@
+Node.js version v25.0.0 detected.
+Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
+ÔØ» Building...
+Ô£ö Building...
+Initial chunk files                                      | Names                                                 |  Raw size
+styles.css                                               | styles                                                | 205.03 kB | 
+spec-app-services-moderation-profanity-filter.service.js | spec-app-services-moderation-profanity-filter.service |   6.72 kB | 
+chunk-CGZBV6BD.js                                        | -                                                     |   4.07 kB | 
+init-testbed.js                                          | init-testbed                                          |   1.33 kB | 
+vitest-mock-patch.js                                     | vitest-mock-patch                                     | 704 bytes | 
+
+                                                         | Initial total                                         | 217.85 kB
+
+Application bundle generation complete. [2.371 seconds] - 2026-03-15T17:04:39.583Z
+
+Ôû▓ [WARNING] Deprecation [plugin angular-sass]
+
+    src/styles.scss:1:8:
+      1 Ôöé @import './app/vars.scss';
+        ÔòÁ         ^
+
+
+  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+  
+  More info and automated migrator: https://sass-lang.com/d/import
+
+  The plugin "angular-sass" was triggered by this import
+
+    angular:styles/global:styles:3:8:
+      3 Ôöé @import 'src/styles.scss';
+        ÔòÁ         ~~~~~~~~~~~~~~~~~
+
+
+
+[1m[46m RUN [49m[22m [36mv4.1.0 [39m[90mD:/projetos-lives/rede-social-angular[39m
+
+ [31mÔØ»[39m [30m[42m rede-social-angular [49m[39m src/app/services/moderation/profanity-filter.service.spec.ts [2m([22m[2m14 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 39[2mms[22m[39m
+     [32mÔ£ô[39m should be created[32m 10[2mms[22m[39m
+       [32mÔ£ô[39m should lower case and remove accents[32m 2[2mms[22m[39m
+       [32mÔ£ô[39m should convert leet speak numbers[32m 2[2mms[22m[39m
+       [32mÔ£ô[39m should reduce duplicate letters[32m 1[2mms[22m[39m
+       [32mÔ£ô[39m should ignore embedded punctuation triggers[32m 2[2mms[22m[39m
+       [32mÔ£ô[39m should detect direct swear word[32m 2[2mms[22m[39m
+       [32mÔ£ô[39m should detect abbreviations[32m 2[2mms[22m[39m
+       [32mÔ£ô[39m should NOT detect whitelist words (false positives)[32m 2[2mms[22m[39m
+       [32mÔ£ô[39m should detect bad word inside string bound checking[32m 1[2mms[22m[39m
+       [32mÔ£ô[39m should mask accurate sizes with asterisks[32m 2[2mms[22m[39m
+[31m       [31m├ù[31m should preserve original spacing[39m[32m 6[2mms[22m[39m
+       [32mÔ£ô[39m should score high for swear words[32m 2[2mms[22m[39m
+       [32mÔ£ô[39m should score medium for mild insults[32m 2[2mms[22m[39m
+       [32mÔ£ô[39m should score clean for safe text[32m 1[2mms[22m[39m
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ» Failed Tests 1 ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+
+ FAIL   rede-social-angular  src/app/services/moderation/profanity-filter.service.spec.ts > ProfanityFilterService > maskProfanity > should preserve original spacing
+AssertionError: expected 'vai se   foder' to be 'vai se   *****' // Object.is equality
+
+Expected: "vai se   *****"
+Received: "vai se   foder"
+
+ ÔØ» src/app/services/moderation/profanity-filter.service.spec.ts:60:55
+     58|
+     59|     it('should preserve original spacing', () => {
+     60|       expect(service.maskProfanity('vai se   foder')).toBe('vai se   *ÔÇª
+       |                                                       ^
+     61|     });
+     62|   });
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1/1]ÔÄ»
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m13 passed[39m[22m[90m (14)[39m
+[2m   Start at [22m 14:04:39
+[2m   Duration [22m 1.10s[2m (transform 52ms, setup 267ms, import 17ms, tests 39ms, environment 619ms)[22m
+

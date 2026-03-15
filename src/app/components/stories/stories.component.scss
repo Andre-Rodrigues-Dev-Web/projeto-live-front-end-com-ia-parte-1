@@ -1,0 +1,114 @@
+.stories-wrapper {
+  position: relative;
+}
+
+/* Strip */
+.stories-strip {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--ambient-blur);
+  -webkit-backdrop-filter: var(--ambient-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  overflow-x: auto;
+  scrollbar-width: none; /* Hide scrollbar for cleaner lookup */
+  margin-bottom: 12px;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Story Card */
+.story-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  width: 80px;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &.seen .story-preview {
+    box-shadow: 0 0 0 3px #ccc;
+  }
+}
+
+.story-preview {
+  width: 72px;
+  height: 108px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 0 0 3px #00c9ff, 0 4px 12px rgba(0, 201, 255, 0.25);
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a66c2 0%, #00c9ff 100%);
+  transition: box-shadow 0.2s;
+}
+
+.add-preview {
+  background: rgba(0, 0, 0, 0.03) !important;
+  box-shadow: 0 0 0 3px var(--glass-border) !important;
+}
+
+.add-plus {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: #0a66c2;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+  z-index: 2;
+}
+
+.story-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid white;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.story-preview-emoji {
+  font-size: 28px;
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.story-name {
+  font-size: 11px;
+  color: #1a1a1a;
+  text-align: center;
+  font-weight: 500;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

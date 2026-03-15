@@ -1,0 +1,23 @@
+<header class="navbar">
+  <div class="navbar-content">
+    <div class="logo">
+      <img src="assets/imgs/logos/logo.png" alt="SocialNet Logo" class="logo-img">
+    </div>
+    <nav class="nav-links">
+      <a class="nav-btn" routerLink="/feed" routerLinkActive="active">
+        <i class="fas fa-home"></i> <span class="nav-label">Feed</span>
+      </a>
+      <a class="nav-btn" routerLink="/profile" routerLinkActive="active">
+        <i class="fas fa-user"></i> <span class="nav-label">Perfil</span>
+      </a>
+      <a class="nav-btn" routerLink="/synergy" routerLinkActive="active">
+        <i class="fas fa-bolt"></i> <span class="nav-label">Sinergias</span>
+      </a>
+
+      <!-- Mobile: toggle sidebar button -->
+      <button class="nav-btn mobile-only sidebar-toggle-btn" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </div>
+</header>

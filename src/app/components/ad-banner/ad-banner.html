@@ -1,0 +1,30 @@
+<div class="ad-container">
+  <div class="ad-banner" (click)="clickAd()">
+    <div class="ad-content">
+      <img [src]="getCurrentAd().image" [alt]="getCurrentAd().title" class="ad-image">
+      <div class="ad-text">
+        <h3 class="ad-title">{{ getCurrentAd().title }}</h3>
+        <p class="ad-description">{{ getCurrentAd().description }}</p>
+        <button class="ad-cta">{{ getCurrentAd().cta }}</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-controls">
+    <button class="control-btn" (click)="previousAd()" title="Anúncio anterior">←</button>
+    
+    <div class="ad-indicators">
+      <button
+        *ngFor="let ad of advertisements(); let i = index"
+        class="indicator"
+        [class.active]="i === currentAdIndex()"
+        (click)="goToAd(i)"
+        [title]="'Ir para anúncio ' + (i + 1)"
+      ></button>
+    </div>
+
+    <button class="control-btn" (click)="nextAd()" title="Próximo anúncio">→</button>
+  </div>
+
+  <div class="ad-label">Anúncio Patrocinado</div>
+</div>

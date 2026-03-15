@@ -1,0 +1,67 @@
+<div class="synergy-grid-container">
+  <div class="header-banner">
+    <div class="banner-content">
+      <h1>💡 Grade de Sinergias <span class="badge">Web 4.0</span></h1>
+      <p>A IA SocialNet cruza seus objetivos e encontra quem pode te ajudar ou colaborar instantaneamente!</p>
+    </div>
+  </div>
+
+  <div class="grid-content">
+    <!-- Help Box (Contextual Onboarding for 60+) -->
+    <div class="help-box mat-elevation-z2" *ngIf="showHelp()">
+      <div class="help-header">
+        <span>🤔 Como funciona a Grade de Sinergias?</span>
+        <button class="close-help" (click)="toggleHelp()">✕ Entendi</button>
+      </div>
+      <p class="help-text">
+        Nossa <strong>Inteligência Artificial</strong> lê o que a comunidade posta. Se você postar que 
+        <span class="hl-preciso">"Precisa de Ajuda para consertar algo"</span> e outra pessoa postar que 
+        <span class="hl-colaborar">"Quer Colaborar ensinando"</span>, o sistema cruza as informações e cria um "Match" 
+        para vocês conversarem diretamente!
+      </p>
+    </div>
+
+    <div class="empty-state" *ngIf="matches().length === 0">
+      <div class="empty-icon">🤝</div>
+      <h3>Nenhuma Sinergia no Momento</h3>
+      <p>Poste algo com a intenção <strong>"Preciso de Ajuda"</strong> ou <strong>"Quero Colaborar"</strong> para acionar o Matchmaker.</p>
+    </div>
+
+    <div class="matches-list" *ngIf="matches().length > 0">
+      <div class="match-card mat-elevation-z3" *ngFor="let match of matches()">
+        <div class="match-header">
+          <span class="topic-tag"># {{ match.topic }}</span>
+          <span class="compatibility-score"> Sinergia 95%</span>
+        </div>
+
+        <div class="match-users">
+          <div class="user-bubble">
+            <img [src]="match.seekerAvatar" [alt]="match.seekerName" class="avatar">
+            <span class="role">Buscando</span>
+            <span class="name">{{ match.seekerName }}</span>
+          </div>
+
+          <div class="synergy-link">
+            <i class="fas fa-bolt flash-bolt"></i>
+          </div>
+
+          <div class="user-bubble">
+            <img [src]="match.helperAvatar" [alt]="match.helperName" class="avatar">
+            <span class="role">Colaborando</span>
+            <span class="name">{{ match.helperName }}</span>
+          </div>
+        </div>
+
+        <div class="match-desc">
+          <p [innerHTML]="match.description"></p>
+        </div>
+
+        <div class="match-actions">
+          <button mat-raised-button color="primary" class="connect-btn" (click)="connect(match.id)">
+            <i class="fas fa-comments"></i> Iniciar Chat de Sinergia
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

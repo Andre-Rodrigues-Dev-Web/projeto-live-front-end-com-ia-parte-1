@@ -1,0 +1,41 @@
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-left">
+      <p>&copy; 2026 SocialNet. Desenvolvido com <i class="fas fa-heart" style="color: #e11d48;"></i> por <span class="brand-velance">Velance</span></p>
+    </div>
+    <div class="footer-right">
+      <nav class="footer-nav">
+        <button class="footer-link" (click)="toggleAccessibility()">
+          <i class="fas fa-wheelchair"></i> Acessibilidade
+        </button>
+        <a href="#" class="footer-link"><i class="fas fa-user-shield"></i> Privacidade (LGPD)</a>
+        <a href="#" class="footer-link"><i class="fas fa-cookie-bite"></i> Preferências</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Accessibility Panel (Moveu de app.html para cá) -->
+<div class="accessibility-panel" *ngIf="showAccessibility()">
+  <div class="panel-header">
+    <h4>Preferências de Acessibilidade <i class="fas fa-universal-access"></i></h4>
+    <button class="close-btn" (click)="toggleAccessibility()">✕</button>
+  </div>
+  <div class="panel-body">
+    <div class="panel-item">
+      <span>Modo Escuro (Contraste):</span>
+      <button class="toggle-btn" [class.active]="accService.isDarkMode()" (click)="accService.toggleDarkMode()">
+        <span *ngIf="accService.isDarkMode()"><i class="fas fa-moon"></i> Ativado</span>
+        <span *ngIf="!accService.isDarkMode()"><i class="fas fa-sun"></i> Desativado</span>
+      </button>
+    </div>
+    <div class="panel-item">
+      <span>Tamanho da Letra:</span>
+      <div class="button-group">
+        <button (click)="accService.setFontSize('small')" [class.active]="accService.fontSize() === 'small'">A-</button>
+        <button (click)="accService.setFontSize('medium')" [class.active]="accService.fontSize() === 'medium'">A</button>
+        <button (click)="accService.setFontSize('large')" [class.active]="accService.fontSize() === 'large'">A+</button>
+      </div>
+    </div>
+  </div>
+</div>

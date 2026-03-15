@@ -1,0 +1,59 @@
+<div class="business-directory-container">
+  <div class="header-banner">
+    <div class="banner-content">
+      <h1>🏢 Negócios de Bambuí <span class="badge">Guia Local</span></h1>
+      <p>Apoie o comércio da nossa cidade! Encontre telefones e redes sociais dos estabelecimentos de Bambuí.</p>
+    </div>
+  </div>
+
+  <div class="directory-content">
+    <!-- Filters & Search -->
+    <div class="filter-section">
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Buscar por nome ou categoria..." [value]="searchQuery()" (input)="updateSearch($event)">
+      </div>
+
+      <div class="categories-list">
+        <button 
+          *ngFor="let cat of categories()" 
+          [class.active]="selectedCategory() === cat"
+          (click)="setCategory(cat)"
+          class="cat-btn"
+        >
+          {{ cat }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Listings Grid -->
+    <div class="business-grid">
+      <div class="empty-state" *ngIf="filteredBusinesses().length === 0">
+        <div class="empty-icon">🔍</div>
+        <h3>Nenhum comércio encontrado</h3>
+        <p>Tente buscar por outro termo ou categoria.</p>
+      </div>
+
+      <div class="business-card mat-elevation-z2" *ngFor="let business of filteredBusinesses()">
+        <div class="card-header">
+          <span class="category-tag"># {{ business.category }}</span>
+        </div>
+        
+        <div class="card-body">
+          <h3 class="business-name">{{ business.name }}</h3>
+          <p class="business-address"><i class="fas fa-map-marker-alt"></i> {{ business.address }}</p>
+          
+          <div class="contact-links">
+            <a href="tel:{{ business.phone.replace(' ', '').replace('(', '').replace(')', '').replace('-', '') }}" class="contact-item">
+              <i class="fas fa-phone"></i> {{ business.phone }}
+            </a>
+            
+            <a *ngIf="business.instagram" href="https://instagram.com/{{ business.instagram.replace('@','') }}" target="_blank" class="contact-item insta">
+              <i class="fab fa-instagram"></i> {{ business.instagram }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

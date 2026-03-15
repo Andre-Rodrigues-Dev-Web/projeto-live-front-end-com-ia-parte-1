@@ -1,0 +1,114 @@
+<div class="feed-section">
+  <app-stories></app-stories>
+  <app-post-creator></app-post-creator>
+  <app-ad-banner></app-ad-banner>
+
+  <div class="feed-container">
+    <!-- Smart Feed Tabs -->
+    <div class="feed-tabs">
+      <button mat-button [class.active]="currentStrategy() === 'geral'" (click)="setStrategy('geral')">
+        <i class="fas fa-list"></i> Geral
+      </button>
+      <button mat-button [class.active]="currentStrategy() === 'para-voce'" (click)="setStrategy('para-voce')">
+        <i class="fas fa-heart"></i> Para Você
+      </button>
+      <button mat-button [class.active]="currentStrategy() === 'metas'" (click)="setStrategy('metas')">
+        <i class="fas fa-bullseye"></i> Metas
+      </button>
+      <button mat-button [class.active]="currentStrategy() === 'proximos'" (click)="setStrategy('proximos')">
+        <i class="fas fa-map-marker-alt"></i> Próximos
+      </button>
+    </div>
+
+    <!-- Feed Posts -->
+    <div class="feed-posts">
+      <div *ngFor="let post of posts()" class="post-card mat-elevation-z2">
+
+        <div class="post-header">
+          <div class="author-info">
+            <img [src]="post.avatar" [alt]="post.author" class="avatar">
+            <div class="author-details">
+              <h3 class="author-name">
+                {{ post.author }}
+                <i class="fas fa-lock private-lock" *ngIf="post.isPrivateAuthor" matTooltip="Perfil Particular"></i>
+                <span class="intent-badge" *ngIf="getIntentLabel(post.intent)">
+                  {{ getIntentLabel(post.intent) }}
+                </span>
+              </h3>
+              <p class="post-time">
+                <i class="fas fa-clock"></i> {{ formatDate(post.timestamp) }}
+              </p>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button mat-icon-button class="edit-btn" *ngIf="post.author === 'Você'" (click)="enableEdit(post)" matTooltip="Editar post">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button mat-icon-button class="delete-btn" (click)="deletePost(post.id)" matTooltip="Deletar post">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="post-content">
+          <!-- View Mode -->
+          <p *ngIf="editingPostId() !== post.id" [style.display]="isSummaryExpanded(post.id) ? 'none' : 'block'">{{ post.content }}</p>
+          
+          <!-- Edit Mode -->
+          <div class="inline-edit-box" *ngIf="editingPostId() === post.id">
+            <textarea [(ngModel)]="editContent" class="inline-edit-textarea" rows="2"></textarea>
+            <div class="inline-edit-actions">
+              <button mat-button color="primary" (click)="saveEdit(post.id)"><i class="fas fa-check"></i> Salvar</button>
+              <button mat-button (click)="cancelEdit()"><i class="fas fa-times"></i> Cancelar</button>
+            </div>
+          </div>
+          
+          <!-- Post Media (2025 addition) -->
+          <div class="post-media-container" *ngIf="post.image">
+            <img [src]="post.image" *ngIf="!post.mediaType || post.mediaType === 'image'" class="post-attached-image">
+            <video [src]="post.image" *ngIf="post.mediaType === 'video'" controls class="post-attached-video"></video>
+          </div>
+          
+
+          <!-- AI Summary Box (Web 4.0) -->
+          <div class="ai-summary-box" *ngIf="isSummaryExpanded(post.id)">
+            <div class="summary-header">
+              <i class="fas fa-robot"></i> Resumo por IA SocialNet
+            </div>
+            <p class="summary-text">{{ post.aiSummary || '• IA processando conteúdo...' }}</p>
+          </div>
+
+          <button
+            mat-button
+            color="primary"
+            class="summarize-btn"
+            *ngIf="post.content.length > 120 || post.aiSummary"
+            (click)="toggleSummary(post.id)"
+          >
+            <i class="fas" [class.fa-robot]="!isSummaryExpanded(post.id)" [class.fa-align-left]="isSummaryExpanded(post.id)"></i>
+            {{ isSummaryExpanded(post.id) ? 'Ver Texto Original' : 'Resumir com IA' }}
+          </button>
+        </div>
+
+        <div class="post-stats">
+          <span class="stat"><i class="fas fa-thumbs-up"></i> {{ post.likes }}</span>
+          <span class="stat"><i class="fas fa-comment"></i> {{ post.comments }}</span>
+          <span class="stat"><i class="fas fa-share-alt"></i> {{ post.shares }}</span>
+        </div>
+
+        <div class="post-actions">
+          <button mat-button class="action-btn" (click)="likePost(post.id)">
+            <i class="fas fa-thumbs-up"></i> Curtir
+          </button>
+          <button mat-button class="action-btn" (click)="commentPost(post.id)">
+            <i class="fas fa-comment"></i> Comentar
+          </button>
+          <button mat-button class="action-btn" (click)="sharePost(post.id)" *ngIf="!post.isPrivateAuthor">
+            <i class="fas fa-share-alt"></i> Compartilhar
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

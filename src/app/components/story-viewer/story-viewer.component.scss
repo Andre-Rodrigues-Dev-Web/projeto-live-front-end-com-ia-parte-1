@@ -1,0 +1,240 @@
+.viewer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes storyIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.viewer-card {
+  position: relative;
+  width: 380px;
+  height: 640px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  animation: storyIn 0.25s ease;
+
+  @media (max-width: 480px) {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+/* Progress bar */
+.progress-bar-wrapper {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: width 0.05s linear;
+}
+
+/* Header */
+.viewer-header {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.viewer-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.viewer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.viewer-name {
+  display: block;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.viewer-time {
+  display: block;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 11px;
+}
+
+.viewer-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  .edit-btn, .close-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+
+    &:hover { background: rgba(0, 0, 0, 0.5); }
+  }
+
+  .edit-btn:hover { color: #00c9ff; }
+}
+
+/* Content */
+.story-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0; /* Bleed edge */
+  box-sizing: border-box;
+
+  .story-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+  }
+
+  .story-text {
+    position: relative;
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    line-height: 1.4;
+    padding: 0 24px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+  }
+
+  .story-overlay-text {
+    position: absolute;
+    color: white;
+    font-size: 22px;
+    font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.4);
+    padding: 8px 16px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 80%;
+    word-break: break-word;
+    z-index: 3;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Edit Mode Overlay */
+  .edit-story-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+    animation: fadeIn 0.2s ease;
+
+    .edit-story-textarea {
+      width: 100%;
+      max-width: 300px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 18px;
+      text-align: center;
+      font-family: inherit;
+      resize: none;
+      outline: none;
+
+      &:focus { border-color: #00c9ff; }
+    }
+
+    .edit-story-actions {
+      display: flex;
+      gap: 12px;
+
+      .edit-action-btn {
+        padding: 8px 18px;
+        border-radius: 20px;
+        border: none;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s;
+
+        &.save { background: #00c9ff; color: white; }
+        &.cancel { background: rgba(255, 255, 255, 0.2); color: white; }
+
+        &:hover { transform: scale(1.05); }
+      }
+    }
+  }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Navigation touch zones */
+.nav-prev, .nav-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.nav-prev { left: 0; }
+.nav-next { right: 0; }

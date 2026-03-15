@@ -1,0 +1,92 @@
+<div class="post-creator-container">
+  <div class="creator-card">
+    <div class="creator-header">
+      <img [src]="currentUser.avatar" [alt]="currentUser.name" class="user-avatar">
+
+      <form [formGroup]="postForm" class="post-form" (ngSubmit)="createPost()">
+        <mat-form-field appearance="outline" class="post-field">
+          <mat-label>O que você está pensando?</mat-label>
+          <textarea
+            matInput
+            formControlName="content"
+            rows="3"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="2"
+            cdkAutosizeMaxRows="8"
+          ></textarea>
+          <mat-hint align="end">{{ charCount }}/500</mat-hint>
+
+          <mat-error *ngIf="contentCtrl.hasError('required')">
+            <i class="fas fa-exclamation-circle"></i> O conteúdo é obrigatório.
+          </mat-error>
+          <mat-error *ngIf="contentCtrl.hasError('minlength')">
+            <i class="fas fa-exclamation-circle"></i> Mínimo de 3 caracteres.
+          </mat-error>
+          <mat-error *ngIf="contentCtrl.hasError('maxlength')">
+            <i class="fas fa-exclamation-circle"></i> Máximo de 500 caracteres.
+          </mat-error>
+          <mat-error *ngIf="contentCtrl.hasError('profanity')">
+            <i class="fas fa-exclamation-circle"></i> {{ contentCtrl.getError('profanity').message }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Intent Selector (Web 4.0) -->
+        <div class="intent-selector">
+          <span class="intent-label"><i class="fas fa-lightbulb"></i> Qual o objetivo do post?</span>
+          <mat-chip-listbox formControlName="intent" class="intent-chips">
+            <mat-chip-option value="geral" selected>📌 Geral</mat-chip-option>
+            <mat-chip-option value="ajuda">💡 Preciso de Ajuda</mat-chip-option>
+            <mat-chip-option value="divulgacao">🚀 Divulgando</mat-chip-option>
+            <mat-chip-option value="colaborar">🤝 Colaborar</mat-chip-option>
+            <mat-chip-option value="meta">🎯 Meta/Carreira</mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+
+        <!-- Media Preview Container -->
+        <div class="media-preview-container" *ngIf="attachedMedia()">
+          <img [src]="attachedMedia()" *ngIf="mediaType() === 'image'" class="media-preview">
+          <video [src]="attachedMedia()" *ngIf="mediaType() === 'video'" controls class="media-preview"></video>
+          <button type="button" class="remove-media-btn" (click)="removeMedia()">✕</button>
+        </div>
+
+        <div class="creator-actions">
+          <div class="action-icons">
+            <!-- Hidden File Input -->
+            <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*,video/*" style="display: none">
+
+            <button type="button" mat-icon-button matTooltip="Adicionar foto" class="media-btn" (click)="fileInput.click()">
+              <i class="fas fa-image"></i>
+            </button>
+            <button type="button" mat-icon-button matTooltip="Adicionar vídeo" class="media-btn" (click)="fileInput.click()">
+              <i class="fas fa-video"></i>
+            </button>
+            <button type="button" mat-icon-button matTooltip="Adicionar emoji" class="media-btn" [matMenuTriggerFor]="emojiMenu">
+              <i class="fas fa-smile"></i>
+            </button>
+
+            <!-- Emoji Menu -->
+            <mat-menu #emojiMenu="matMenu" class="emoji-menu">
+              <div class="emoji-grid">
+                <button type="button" mat-menu-item (click)="addEmoji('😊')">😊</button>
+                <button type="button" mat-menu-item (click)="addEmoji('😂')">😂</button>
+                <button type="button" mat-menu-item (click)="addEmoji('😍')">😍</button>
+                <button type="button" mat-menu-item (click)="addEmoji('🔥')">🔥</button>
+                <button type="button" mat-menu-item (click)="addEmoji('👍')">👍</button>
+              </div>
+            </mat-menu>
+          </div>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="publish-btn"
+          >
+            <i class="fas fa-paper-plane"></i>
+            Publicar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

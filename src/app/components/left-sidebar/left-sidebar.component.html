@@ -1,0 +1,21 @@
+<aside class="left-sidebar">
+  <mat-nav-list class="menu-list">
+    <div *ngFor="let item of menuItems" class="menu-item-wrapper">
+      <a
+        mat-list-item
+        (click)="navigate(item.view, item.strategy)"
+        [class.active]="currentView() === item.view && (item.view === 'feed' ? currentStrategy() === item.strategy : item.view === 'communities' ? communitiesTab() === item.strategy : true)"
+        class="menu-link"
+      >
+        <span matListItemTitle class="item-title">
+          <i class="fas" [class]="item.icon"></i>
+          {{ item.label }}
+        </span>
+      </a>
+    </div>
+  </mat-nav-list>
+
+  <div class="footer-sidebar">
+    <p>Rede Social © 2026</p>
+  </div>
+</aside>

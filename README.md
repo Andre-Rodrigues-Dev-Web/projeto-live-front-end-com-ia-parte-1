@@ -1,6 +1,6 @@
-# Boilerplate
+# RedeSocialAngular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.0-next.1.
 
 ## Development server
 

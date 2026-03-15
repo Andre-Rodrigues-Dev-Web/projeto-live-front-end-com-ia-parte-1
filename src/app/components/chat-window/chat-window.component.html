@@ -1,0 +1,102 @@
+<div class="chat-window-container" *ngIf="activeUser() as user">
+  <!-- Chat Header -->
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="avatar-sm">
+        <img [src]="user.avatar" [alt]="user.name" class="avatar-img">
+      </div>
+      <div>
+        <span class="user-name">{{ user.name }}</span>
+        <span class="user-status online">Online</span>
+      </div>
+    </div>
+    <div class="chat-actions">
+      <!-- 2025 Call Triggers -->
+      <button mat-icon-button class="action-btn" (click)="startCall('audio')" matTooltip="Chamada de Voz">
+        <i class="fas fa-phone"></i>
+      </button>
+      <button mat-icon-button class="action-btn" (click)="startCall('video')" matTooltip="Chamada de Vídeo">
+        <i class="fas fa-video"></i>
+      </button>
+      <button mat-icon-button class="close-btn" (click)="closeChat()" matTooltip="Fechar">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Messages List -->
+  <div class="chat-messages" #messagesContainer>
+    <div
+      *ngFor="let msg of messages()"
+      class="message-bubble"
+      [class.sent]="msg.senderId === 0"
+      [class.received]="msg.senderId !== 0"
+    >
+      <div class="bubble-content">
+        <!-- Text/Default -->
+        <p *ngIf="!msg.type || msg.type === 'text'">{{ msg.text }}</p>
+        
+        <!-- Image Attachment -->
+        <img [src]="msg.fileUrl" *ngIf="msg.type === 'image'" class="message-img">
+        
+        <!-- Audio Attachment -->
+        <audio [src]="msg.fileUrl" controls *ngIf="msg.type === 'audio'" class="message-audio"></audio>
+        
+        <!-- File Doc Attachment -->
+        <a [href]="msg.fileUrl" download *ngIf="msg.type === 'file'" class="message-file">
+          <i class="fas fa-file-alt"></i> {{ msg.text || 'Documento' }}
+        </a>
+      </div>
+      <span class="timestamp">{{ msg.timestamp | date:'shortTime' }}</span>
+    </div>
+  </div>
+
+  <!-- Input Area (mat-form-field) -->
+  <div class="chat-input-area">
+    <!-- 2025 Input Actions Left -->
+    <div class="input-actions-left">
+      <button mat-icon-button (click)="fileInput.click()" matTooltip="Anexar arquivo">
+        <i class="fas fa-paperclip"></i>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="emojiMenu" matTooltip="Emojis">
+        <i class="fas fa-smile"></i>
+      </button>
+      <button mat-icon-button class="mic-btn" (click)="recordAudio()" matTooltip="Gravar Áudio">
+        <i class="fas fa-microphone"></i>
+      </button>
+
+      <!-- Emoji Menu (Simulado) -->
+      <mat-menu #emojiMenu="matMenu" class="emoji-menu">
+        <div class="emoji-grid">
+          <button type="button" mat-menu-item (click)="addEmoji('😊')">😊</button>
+          <button type="button" mat-menu-item (click)="addEmoji('😂')">😂</button>
+          <button type="button" mat-menu-item (click)="addEmoji('👍')">👍</button>
+          <button type="button" mat-menu-item (click)="addEmoji('🔥')">🔥</button>
+          <button type="button" mat-menu-item (click)="addEmoji('😍')">😍</button>
+        </div>
+      </mat-menu>
+    </div>
+
+    <!-- Hidden File Input -->
+    <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none">
+
+    <div class="message-input-wrapper">
+      <textarea
+        placeholder="Digite uma mensagem..."
+        [(ngModel)]="newMessage"
+        (keypress)="handleKeyPress($event)"
+        class="custom-chat-textarea"
+        rows="1"
+      ></textarea>
+    </div>
+    <button
+      mat-icon-button
+      class="send-btn"
+      color="primary"
+      (click)="sendMessage()"
+      [disabled]="!newMessage.trim()"
+    >
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </div>
+</div>
